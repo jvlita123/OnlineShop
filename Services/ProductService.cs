@@ -34,6 +34,7 @@ namespace Sklep_MVC_Projekt.Services
                 CategoryID = product.CategoryID,
                 IsNew = product.IsNew,
                 IsOnSale = product.IsOnSale,
+                Photo = product.Photo,
             };
 
             return _productRepository.AddAndSaveChanges(newProduct);

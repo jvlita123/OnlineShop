@@ -24,12 +24,12 @@ namespace Sklep_MVC_Projekt.Services
                 Customer = customerProduct.Customer,
             };
             _customerProductRepository.AddAndSaveChanges(newCustomerProduct);
-            return _customerProductRepository.GetAll().Include("Customer").Include("Product").ToList();
+            return _customerProductRepository.GetAll().Include(x=>x.Customer).Include(x=>x.Product).Include(x=>x.Product.Photo).ToList();
         }
 
         public List<CustomerProduct> GetAll()
         {
-            return _customerProductRepository.GetAll().Include("Customer").Include("Product").ToList();
+            return _customerProductRepository.GetAll().Include(x=>x.Customer).Include(x=>x.Product).Include(x=>x.Product.Photo).ToList();
         }
         public CustomerProduct GetById(int id)
         {
@@ -38,7 +38,7 @@ namespace Sklep_MVC_Projekt.Services
 
         public List<CustomerProduct> CustomerProducts(int id)
         {
-            List<CustomerProduct> list = _customerProductRepository.GetAll().Include("Customer").Include("Product").Where(x => x.Customer.CustomerID == id).ToList();
+            List<CustomerProduct> list = _customerProductRepository.GetAll().Include(x=>x.Product.Photo).Include(x=>x.Customer).Include(x=>x.Product).Where(x => x.Customer.CustomerID == id).ToList();
 
             return list;
         }

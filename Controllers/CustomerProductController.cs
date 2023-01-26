@@ -28,8 +28,8 @@ namespace Sklep_MVC_Projekt.Controllers
 
         public IActionResult GetCustomerProducts()
         {
-            Customer customer = _customerService.GetAll().Where(x => x.Email == HttpContext.User.Identity.Name).FirstOrDefault();
-            var customerProducts = _customerProductService.CustomerProducts(customer.CustomerID);
+            Customer customer = _customerService.GetByEmail(HttpContext.User.Identity.Name);
+            var customerProducts = _customerProductService.GetAll().Where(x=>x.CustomerID== customer.CustomerID);
 
             return View(customerProducts.ToList());
         }
