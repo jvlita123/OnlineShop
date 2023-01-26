@@ -19,7 +19,7 @@ namespace Sklep_MVC_Projekt.Services
         }
         public Product GetById(int id)
         {
-            return _productRepository.GetById(id);
+            return _productRepository.GetAll().Include(x=>x.Photo).Where(x=>x.ProductID == id).FirstOrDefault();
         }
 
         public Product AddNewProduct(Product product)

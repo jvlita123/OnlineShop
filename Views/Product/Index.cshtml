@@ -74,7 +74,7 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "ProductDetails", new {  id=item.ProductID  }) |
-                @Html.ActionLink("Delete", "DeleteProduct", new {  id=item.ProductID })
+                @*@Html.ActionLink("Delete", "DeleteProduct", new {  id=item.ProductID })*@
                 @Html.ActionLink("Add to Shopping cart", "AddCustomerProduct", "CustomerProduct",new {  id=item.ProductID })
             </td>
         </tr>

@@ -21,7 +21,7 @@ namespace Sklep_MVC_Projekt.Controllers
             return View(_productService.GetAll().ToList());
         }
 
-        public ActionResult Details(int id)
+        public ActionResult ProductDetails(int id)
         {
             return View(_productService.GetById(id));
         }

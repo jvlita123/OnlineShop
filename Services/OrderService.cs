@@ -24,7 +24,7 @@ namespace Sklep_MVC_Projekt.Services
 
         public Order GetById(int id)
         {
-            return _orderRepository.GetAll().Where(x => x.OrderID == id).FirstOrDefault();
+            return _orderRepository.GetAll().Where(x => x.OrderID == id).Include(x=>x.ProductOrders).Include("Photo").FirstOrDefault();
         }
 
         public Order AddNewOrder(Order order)
@@ -53,9 +53,9 @@ namespace Sklep_MVC_Projekt.Services
             _orderRepository.AddAndSaveChanges(newOrder);
             return newOrder;
         }
-        public List<Order> GetCustomerOrders(int id)
+        public List<Order> GetCustomerOrders(string email)//!!!!!
         {
-            List<Order> list = _orderRepository.GetAll().Where(x => x.Customer.CustomerID == id).ToList();
+            List<Order> list = _orderRepository.GetAll().Where(x => x.Customer.IdentityUser.Email == email).ToList();
 
             return list;
         }
