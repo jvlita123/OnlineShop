@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Sklep_MVC_Projekt.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AddNewProduct">Add New Product</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsNew)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOnSale)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailableAmmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               @if (item.Photo.Count > 0)
+               {
+                        <img src="~/Photos/@item.Photo.FirstOrDefault().Path" height="50" width="50" />
+               }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsNew)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOnSale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailableAmmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "ProductDetails", new {  id=item.ProductID  }) |
+                @Html.ActionLink("Delete", "DeleteProduct", new {  id=item.ProductID })
+                @Html.ActionLink("Add to Shopping cart", "AddCustomerProduct", "CustomerProduct",new {  id=item.ProductID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
