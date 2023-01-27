@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sklep_MVC_Projekt.Models;
 using Sklep_MVC_Projekt.Services;
@@ -51,6 +50,31 @@ namespace Sklep_MVC_Projekt.Controllers
         {
             _productService.DeleteById(id);
             return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(int id)
+        {
+            Product product = _productService.GetById(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(Product product)
+        {
+            Product p = _productService.GetById(product.ProductID);
+            p.ProductID = product.ProductID;
+            p.ProductName = product.ProductName;
+            p.Price= product.Price;
+            p.Description= product.Description;
+            p.IsNew= product.IsNew;
+            p.IsOnSale= product.IsOnSale;
+
+            _productService.Update(p);
+            _productService.SaveChanges();
+            return View(product);
         }
     }
 }

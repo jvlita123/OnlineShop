@@ -48,7 +48,11 @@ namespace Sklep_MVC_Projekt.Services
 
         public void SaveChanges()
         {
-            _productRepository.SaveChanges();
+           _productRepository.SaveChanges();
+        }
+        public void Update(Product product)
+        {
+            _productRepository.Update(product);
         }
 
         public void UpdateAndSaveChanges(Product product)
