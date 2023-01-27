@@ -5,7 +5,7 @@ using Sklep_MVC_Projekt.Services;
 
 namespace Sklep_MVC_Projekt.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private ProductService _productService;
@@ -44,7 +44,6 @@ namespace Sklep_MVC_Projekt.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteProduct(int id)
         {
@@ -53,7 +52,6 @@ namespace Sklep_MVC_Projekt.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             Product product = _productService.GetById(id);
@@ -61,7 +59,6 @@ namespace Sklep_MVC_Projekt.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Product product)
         {
             Product p = _productService.GetById(product.ProductID);
