@@ -1,0 +1,161 @@
+﻿@model Sklep_MVC_Projekt.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShippingMethodID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShippingMethodID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PaymentMethodID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PaymentMethodID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryAdressFlat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryAdressFlat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryAdressBuilding)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryAdressBuilding)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryAdressStreet)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryAdressStreet)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryAdressCity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryAdressCity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryAdressCountry)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryAdressCountry)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Postcode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Postcode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductOrders.FirstOrDefault().Product.Category)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ProductOrders.FirstOrDefault().Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductOrders.FirstOrDefault().Product.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductOrders.FirstOrDefault().Product.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductOrders.FirstOrDefault().Product.IsNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductOrders.FirstOrDefault().Product.IsOnSale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductOrders.FirstOrDefault().Product.AvailableAmmount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var p in Model.ProductOrders)
+    {
+
+        <tr>
+            <td>
+                @if (p.Product.Photo.Count > 0)
+                {
+                  <img src="~/Photos/@p.Product.Photo.FirstOrDefault().Path" height="50" width="50" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => p.Product.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => p.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => p.Product.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => p.Product.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => p.Product.IsNew)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => p.Product.IsOnSale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => p.Product.AvailableAmmount)
+            </td>
+        </tr>
+    }
+    </table>
+    <p>
+        @Html.ActionLink("Back to List", "GetCustomerOrders")
+    </p>

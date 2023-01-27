@@ -4,7 +4,15 @@
     ViewData["Title"] = "ProductDetails";
 }
 
-<h1>ProductDetails</h1>
+<h1>Product Details</h1>
+
+<ul>
+    @foreach (var p in Model.Photo)
+
+    {
+        <li><img src="~/Photos/@p.Path" /></li>
+    }
+</ul>
 
 <div>
     <h4>Product</h4>
@@ -61,6 +69,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Add to Shopping cart", "AddCustomerProduct", "CustomerProduct",new {id=Model.ProductID })
     <a asp-action="Index">Back to List</a>
 </div>
