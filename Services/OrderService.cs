@@ -9,22 +9,24 @@ namespace Sklep_MVC_Projekt.Services
     {
         private readonly OrderRepository _orderRepository;
         private readonly ProductOrderRepository _productOrderRepository;
+        private readonly ProductRepository _productRepository;
 
-        public OrderService(OrderRepository orderRepository, ProductOrderRepository productOrderRepository)
+        public OrderService(OrderRepository orderRepository, ProductOrderRepository productOrderRepository, ProductRepository productRepository)
         {
             _orderRepository = orderRepository;
             _productOrderRepository = productOrderRepository;
+            _productRepository = productRepository; 
         }
 
         public List<Order> GetAll()
         {
-            var order = _orderRepository.GetAll().Include(o => o.Customer).Include(o => o.PaymentMethod).Include(o => o.ShippingMethod).Include(o => o.ProductOrders);
+            var order = _orderRepository.GetAll().Include(x => x.Customer).Include(x => x.PaymentMethod).Include(x => x.ShippingMethod).Include(x => x.ProductOrders);
             return order.ToList();
         }
 
         public Order GetById(int id)
         {
-            return _orderRepository.GetAll().Where(x => x.OrderID == id).Include(x=>x.ProductOrders).Include("Photo").FirstOrDefault();
+            return _orderRepository.GetAll().Where(x => x.OrderID == id).Include(x=>x.ProductOrders).FirstOrDefault();
         }
 
         public Order AddNewOrder(Order order)
@@ -48,6 +50,7 @@ namespace Sklep_MVC_Projekt.Services
                 DeliveryAdressCountry = order.DeliveryAdressCountry,
                 Postcode = order.Postcode,
                 PhoneNumber = order.PhoneNumber,
+                ProductOrders= order.ProductOrders,
             };
 
             _orderRepository.AddAndSaveChanges(newOrder);

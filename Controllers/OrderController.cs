@@ -78,18 +78,10 @@ namespace Sklep_MVC_Projekt.Controllers
             return View(orders);
         }
 
-        public ActionResult GetProductsOrder(int id)
+        public IActionResult Details(int id)
         {
             Order order = _orderService.GetById(id);
             order.ProductOrders = _productOrderService.GetAll().Where(x => x.OrderID == id).ToList();
-
-            // List<Product> Products = _orderService.GetAll().Where(x => x.OrderID == id).Select(x => x.ProductOrders).ToList();
-            return View(order);
-        }
-
-        public ActionResult Details(int id)
-        {
-            Order order = _orderService.GetAll().Where(x => x.OrderID == id).FirstOrDefault();
 
             return View(order);
         }

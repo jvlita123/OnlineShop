@@ -23,7 +23,7 @@ namespace Sklep_MVC_Projekt.Services
             return _customerRepository.GetAll().Where(x => x.Email == email).FirstOrDefault();
         }
 
-        public Customer Add(Customer customer)
+        public Customer AddNewCustomer(Customer customer)
         {
             Customer newCustomer = _customerRepository.AddAndSaveChanges(customer);
 

@@ -37,7 +37,7 @@ namespace Sklep_MVC_Projekt.Controllers
                 productOrder.OrderID = id;
                 productOrder.ProductID = p.ProductID;
                 _productOrderService.AddProductOrder(productOrder);
-
+                _orderService.GetById(id).ProductOrders.Add(productOrder);
             }
             _customerProductService.DeleteAll(customerProductsList);
             return RedirectToAction("Index", "Product");

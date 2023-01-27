@@ -91,7 +91,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
 
@@ -128,6 +127,12 @@
 
         <tr>
             <td>
+                @if (p.Product.Photo.Count > 0)
+                {
+                  <img src="~/Photos/@p.Product.Photo.FirstOrDefault().Path" height="50" width="50" />
+                }
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => p.Product.Category.CategoryName)
             </td>
             <td>
@@ -150,7 +155,7 @@
             </td>
         </tr>
     }
-</table>
-<p>
-    @Html.ActionLink("Back to List", "GetCustomerOrders")
-</p>
+    </table>
+    <p>
+        @Html.ActionLink("Back to List", "GetCustomerOrders")
+    </p>

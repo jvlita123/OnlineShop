@@ -15,7 +15,7 @@ namespace Sklep_MVC_Projekt.Services
 
         public List<ProductOrder> GetAll()
         {
-            return _productOrderRepository.GetAll().Include("Product").Include("Order").ToList();
+            return _productOrderRepository.GetAll().Include(x=>x.Product).Include(x=>x.Order).Include(x=>x.Product.Photo).ToList();
         }
 
         public List<ProductOrder> GetById(int id)
