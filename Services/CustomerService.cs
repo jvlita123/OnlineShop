@@ -15,7 +15,7 @@ namespace Sklep_MVC_Projekt.Services
 
         public List<Customer> GetAll()
         {
-            return _customerRepository.GetAll().Include(x=>x.IdentityUser).ToList();
+            return _customerRepository.GetAll().ToList();
         }
 
         public Customer GetByEmail(string email)

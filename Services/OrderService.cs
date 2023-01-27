@@ -41,7 +41,6 @@ namespace Sklep_MVC_Projekt.Services
                 ShippingMethodID = order.ShippingMethodID,
                 PaymentMethod = order.PaymentMethod,
                 PaymentMethodID = order.PaymentMethodID,
-                Price = order.Price,
                 Status = order.Status,
                 DeliveryAdressFlat = order.DeliveryAdressFlat,
                 DeliveryAdressBuilding = order.DeliveryAdressBuilding,
@@ -49,6 +48,7 @@ namespace Sklep_MVC_Projekt.Services
                 DeliveryAdressCity = order.DeliveryAdressCity,
                 DeliveryAdressCountry = order.DeliveryAdressCountry,
                 Postcode = order.Postcode,
+                Price= order.Price,
                 PhoneNumber = order.PhoneNumber,
                 ProductOrders= order.ProductOrders,
             };

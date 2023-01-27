@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Sklep_MVC_Projekt.Models;
+using Sklep_MVC_Projekt.Repositories;
 using Sklep_MVC_Projekt.Services;
 using System.Net;
 
@@ -35,13 +36,12 @@ namespace Sklep_MVC_Projekt.Controllers
             var orders = _orderService.GetAll();
             return View(orders);
         }
-
+        [HttpGet]
         public ActionResult AddNewOrder()
         {
-            ViewBag.Id = new SelectList(_customerService.GetAll(), "Id", "FirstName");
             ViewBag.PaymentMethodID = new SelectList(_paymentMethodService.GetAll(), "PaymentMethodID", "Name");
             ViewBag.ShippingMethodID = new SelectList(_shippingMethodService.GetAll(), "ShippingMethodID", "Name");
-            ViewBag.OrderID = new SelectList(_orderService.GetAll(), "OrderID", "OrderID");
+
             return View();
         }
 
@@ -66,11 +66,14 @@ namespace Sklep_MVC_Projekt.Controllers
                 productOrder.OrderID = order.OrderID;
                 productOrder.ProductID = p.ProductID;
                 _productOrderService.AddProductOrder(productOrder);
+                order.Price += p.Product.Price;
             }
-
+            _orderService.UpdateAndSaveChanges(order);
+            
             _customerProductService.DeleteAll(customerProductsList);
 
-            return View(order);
+            return RedirectToAction("Details", new { id = order.OrderID });
+
         }
         public ActionResult GetCustomerOrders()
         {
