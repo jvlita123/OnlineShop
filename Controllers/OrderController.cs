@@ -57,7 +57,7 @@ namespace Sklep_MVC_Projekt.Controllers
 
             order.CustomerID = _customerService.GetByEmail(HttpContext.User.Identity.Name).CustomerID;
             order = _orderService.AddNewOrder(order);
-
+            Product product = new Product();
             List<CustomerProduct> customerProductsList = _customerProductService.CustomerProducts(HttpContext.User.Identity.Name).ToList();
 
             foreach (var p in customerProductsList)
@@ -65,11 +65,17 @@ namespace Sklep_MVC_Projekt.Controllers
                 ProductOrder productOrder = new ProductOrder();
                 productOrder.OrderID = order.OrderID;
                 productOrder.ProductID = p.ProductID;
+                productOrder.Product = p.Product;
+                productOrder.Order = order;
                 _productOrderService.AddProductOrder(productOrder);
+
+                product = _productService.GetById(p.ProductID);
+                product.AvailableAmmount--;
+                _productService.UpdateAndSaveChanges(product);
+
                 order.Price += p.Product.Price;
             }
             _orderService.UpdateAndSaveChanges(order);
-            
             _customerProductService.DeleteAll(customerProductsList);
 
             return RedirectToAction("Details", new { id = order.OrderID });

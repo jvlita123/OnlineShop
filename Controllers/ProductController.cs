@@ -45,12 +45,12 @@ namespace Sklep_MVC_Projekt.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteProduct(int id)
         {
             _productService.DeleteById(id);
             return View();
-
         }
     }
 }

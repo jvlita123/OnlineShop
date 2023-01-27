@@ -4,8 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
 <p>
     <a asp-action="AddNewProduct">Add New Product</a>
 </p>
@@ -74,7 +72,22 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "ProductDetails", new {  id=item.ProductID  }) |
-                @*@Html.ActionLink("Delete", "DeleteProduct", new {  id=item.ProductID })*@
+                @Html.ActionLink("Delete", "DeleteProduct", new {  id=item.ProductID })
+                    @if (item.AvailableAmmount <= 0)
+                    {
+                        @if (ViewBag.Message != null)
+                        {
+                            <script type="text/javascript">
+                                window.onload = function () {
+                                    alert("@ViewBag.Message");
+                                };
+                            </script>
+                        }
+
+                    }
+                    else{
+
+                    }
                 @Html.ActionLink("Add to Shopping cart", "AddCustomerProduct", "CustomerProduct",new {  id=item.ProductID })
             </td>
         </tr>
