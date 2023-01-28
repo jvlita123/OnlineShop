@@ -13,6 +13,46 @@
             <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.FirstName" class="control-label"></label>
+                <input asp-for="Input.FirstName" class="form-control" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.LastName" class="control-label"></label>
+                <input asp-for="Input.LastName" class="form-control" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AdressFlat" class="control-label"></label>
+                <input asp-for="Input.AdressFlat" class="form-control" />
+                <span asp-validation-for="Input.AdressFlat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AdressBuilding" class="control-label"></label>
+                <input asp-for="Input.AdressBuilding" class="form-control" />
+                <span asp-validation-for="Input.AdressBuilding" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AdressStreet" class="control-label"></label>
+                <input asp-for="Input.AdressStreet" class="form-control" />
+                <span asp-validation-for="Input.AdressStreet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AdressCity" class="control-label"></label>
+                <input asp-for="Input.AdressCity" class="form-control" />
+                <span asp-validation-for="Input.AdressCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AdressCountry" class="control-label"></label>
+                <input asp-for="Input.AdressCountry" class="form-control" />
+                <span asp-validation-for="Input.AdressCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Postcode" class="control-label"></label>
+                <input asp-for="Input.Postcode" class="form-control" />
+                <span asp-validation-for="Input.Postcode" class="text-danger"></span>
+            </div>
             <div class="form-floating">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>

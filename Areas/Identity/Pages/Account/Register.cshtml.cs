@@ -101,6 +101,31 @@ namespace Sklep_MVC_Projekt.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Imie")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Nazwisko")]
+            public string LastName { get; set; }
+
+            [Display(Name = "AdressFlat")]
+            public string AdressFlat { get; set; }
+
+            [Display(Name = "AdressBuilding")]
+            public string AdressBuilding { get; set; }
+
+            [Display(Name = "AdressStreet")]
+            public string AdressStreet { get; set; }
+
+            [Display(Name = "AdressCity")]
+            public string AdressCity { get; set; }
+
+            [Display(Name = "AdressCountry")]
+            public string AdressCountry { get; set; }
+
+            [StringLength(4, MinimumLength = 4, ErrorMessage = "Invalid postcode")]
+            public string Postcode { get; set; }
+
         }
 
 
@@ -131,6 +156,15 @@ namespace Sklep_MVC_Projekt.Areas.Identity.Pages.Account
                     c.IdentityUser = user;
                     c.Email = Input.Email;
                     c.Id= userId;
+                    c.AdressCity = Input.AdressCity;
+                    c.AdressFlat = Input.AdressFlat;
+                    c.AdressCountry = Input.AdressCountry;
+                    c.AdressBuilding = Input.AdressBuilding;
+                    c.AdressStreet = Input.AdressStreet;
+                    c.FirstName = Input.FirstName;
+                    c.LastName = Input.LastName;
+                    c.Postcode= Input.Postcode;
+
                     _customerService.AddNewCustomer(c);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

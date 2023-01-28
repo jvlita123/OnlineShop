@@ -18,7 +18,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<DataContext>();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<DataContext>()
             .AddDefaultUI()
             .AddDefaultTokenProviders();
@@ -44,7 +44,6 @@ builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<ShippingMethodRepository>();
 builder.Services.AddScoped<ShippingMethodService>();
-
 
 var app = builder.Build();
 
