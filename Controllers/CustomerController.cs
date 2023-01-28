@@ -24,40 +24,40 @@ namespace Sklep_MVC_Projekt.Controllers
             return View(_customerService.GetAll().ToList());
         }
 
-        //// GET: CustomerController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    Customer customer = _customerService.GetById(id);
+        // GET: CustomerController/Details/5
+        public ActionResult Details(int id)
+        {
+            Customer customer = _customerService.GetById(id);
 
-        //    return View(customer);
-        //}
+            return View(customer);
+        }
 
-        //[HttpGet]
-        //public IActionResult EditCustomer(int id)
-        //{
-        //    Customer customer = _customerService.GetById(id);
-        //    return View(customer);
-        //}
+        [HttpGet]
+        public IActionResult EditCustomer(int id)
+        {
+            Customer customer = _customerService.GetById(id);
+            return View(customer);
+        }
 
-        //[HttpPost]
-        //public IActionResult EditCustomer(Customer customer)
-        //{
-        //    Customer c = _customerService.GetById(customer.CustomerID);
-        //    c.AdressFlat = customer.AdressFlat;
-        //    c.AdressCity = customer.AdressCity;
-        //    c.AdressStreet = customer.AdressStreet;
-        //    c.AdressCountry = customer.AdressCountry;
-        //    c.AdressBuilding = customer.AdressBuilding;
-        //    c.Email = customer.Email;
-        //    c.LastName = customer.LastName;
-        //    c.FirstName = customer.FirstName;
-        //    c.Postcode = customer.Postcode;
+        [HttpPost]
+        public IActionResult EditCustomer(Customer customer)
+        {
+            Customer c = _customerService.GetById(customer.CustomerID);
+            c.AdressFlat = customer.AdressFlat;
+            c.AdressCity = customer.AdressCity;
+            c.AdressStreet = customer.AdressStreet;
+            c.AdressCountry = customer.AdressCountry;
+            c.AdressBuilding = customer.AdressBuilding;
+            c.Email = customer.Email;
+            c.LastName = customer.LastName;
+            c.FirstName = customer.FirstName;
+            c.Postcode = customer.Postcode;
 
 
-        //    _customerService.Update(c);
-        //    _customerService.SaveChanges();
-        //    return View(customer);
-        //}
+            _customerService.Update(c);
+            _customerService.SaveChanges();
+            return View(customer);
+        }
 
         // GET: CustomerController/Delete/5
         public ActionResult Delete(int id)
