@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sklep_MVC_Projekt.Models;
 using Sklep_MVC_Projekt.Services;
+using System.Collections.Generic;
+using X.PagedList;
 
 namespace Sklep_MVC_Projekt.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private ProductService _productService;
@@ -15,9 +17,43 @@ namespace Sklep_MVC_Projekt.Controllers
             _productService = productService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(_productService.GetAll().ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+
+            var products = _productService.GetAll().ToList();
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.ProductName.Contains(searchString)
+                                       || s.ProductName.Contains(searchString)).ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    products = products.OrderByDescending(s => s.Price).ToList();
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Price).ToList();
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult ProductDetails(int id)
