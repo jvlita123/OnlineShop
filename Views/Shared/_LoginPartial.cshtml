@@ -6,21 +6,21 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            <a class="font-violet-300 hover:bg-gray fw-bold text-decoration-none d-block px-4 py-2" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>
     <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                <button class="bg-violet-300 hover:bg-violet-400 rounded-full py-2 px-4 d-block text-white fw-bold text-decoration-none ring-4 border-0"  type="submit">Logout</button>
         </form>
     </li>
 }
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class=" font-violet-300 hover:bg-gray fw-bold text-decoration-none d-block px-4 py-2" asp-area="Identity" asp-page="/Account/Register">Register</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="bg-violet-300 hover:bg-violet-400 rounded-full py-2 px-4 d-block text-white fw-bold text-decoration-none" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
 </ul>

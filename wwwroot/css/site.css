@@ -13,6 +13,60 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+.font-white {
+    color: white;
+    font-weight: 700;
+    display:inline-block;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+.bg-violet-300 {
+    background-color: rgb(196 181 253);
+}
+
+.font-violet-300 {
+    color: rgb(196 181 253);
+}
+
+.hover\:bg-violet-400:hover{
+    background-color: rgb(167 139 250);
+}
+
+.Logo {
+    color: white;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.hover\:bg-gray:hover {
+    background-color: #d9d4da;
+    opacity:0.1;
+}
+
+.mr-16{
+    margin-right:16px;
+}
+
+.mr-9 {
+    margin-right: 9px;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.font-medium {
+    font-weight: 400;
+}
+
+.font-extrabold {
+    font-weight: 800;
+    text-decoration-style:solid;
+}
+
+.ring-4 {
+    border-color: rgb(196 181 253);
 }
