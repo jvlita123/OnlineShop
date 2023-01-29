@@ -51,7 +51,7 @@ namespace Sklep_MVC_Projekt.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 4;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }

@@ -18,6 +18,10 @@ body {
     padding: 0;
 }
 
+.customer-body {
+    background-color: white
+}
+
 .body-first-page {
     text-align: center;
     position: relative;
@@ -25,21 +29,100 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
+    margin: 0px;
     height: 110vh;
-    margin-top:0px;
+    margin-top: 0px;
     background-attachment: scroll;
-
 }
+
+.body-first-page-img {
+    text-align: center;
+    position: relative;
+    background-color: #1c1919;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    margin: 0px;
+    height: 50px;
+    margin-top: 0px;
+    background-attachment: scroll;
+}
+
 
 .my-navbar {
     position: relative;
     color: white;
+    background-color: black;
+    opacity: 0.2;
 }
 
-.my-navbar:hover {
-    opacity: 1;
-    background-color:black;
-    opacity:0.2;
-    color:black;
+    .my-navbar:hover {
+        opacity: 1;
+        background-color: black;
+        opacity: 0.5;
+        color: black;
+    }
 
+.container-products {
+    display: flex;
+    position: relative;
+    position: center;
+    width: 100%;
+    height: 355px;
+    margin-left:2vw;
 }
+
+.img-product {
+    transition-duration: 3s;
+    overflow: hidden;
+    width: 310px;
+    height: 350px;
+    position: relative;
+    border-radius: 20px;
+    border: none;
+    padding: 1vw;
+    display: inline-block;
+    margin-left: 1vw;
+}
+
+.img-product:hover {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    z-index: 0;
+    -webkit-filter: brightness(50%);
+    filter: brightness(20%);
+    cursor: pointer;
+}
+
+.box {
+    width: 300px;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    height: 350px;
+    position: relative;
+    text-align: center;
+}
+
+
+#text {
+    position: absolute;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    margin-top: -185px;
+    padding: 0;
+    width: 300px;
+    height: 175px;
+    margin-left: 1vw;
+    opacity: 0;
+}
+
+.img-product:hover + #text {
+    opacity: 0.7;
+}
+
+#text:hover {
+    opacity: 0.7;
+}
+
