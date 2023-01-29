@@ -1,72 +1,128 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
-.font-white {
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.customer-body {
+    background-color: white
+}
+
+.body-first-page {
+    text-align: center;
+    position: relative;
+    background-image: url(RolexTlo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    margin: 0px;
+    height: 110vh;
+    margin-top: 0px;
+    background-attachment: scroll;
+}
+
+.body-first-page-img {
+    text-align: center;
+    position: relative;
+    background-color: #1c1919;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    margin: 0px;
+    height: 50px;
+    margin-top: 0px;
+    background-attachment: scroll;
+}
+
+
+.my-navbar {
+    position: relative;
     color: white;
-    font-weight: 700;
-    display:inline-block;
+    background-color: black;
+    opacity: 0.2;
 }
 
-.rounded-full {
-    border-radius: 9999px;
+    .my-navbar:hover {
+        opacity: 1;
+        background-color: black;
+        opacity: 0.5;
+        color: black;
+    }
+
+.container-products {
+    display: flex;
+    position: relative;
+    position: center;
+    width: 100%;
+    height: 355px;
+    margin-left:2vw;
 }
 
-.bg-violet-300 {
-    background-color: rgb(196 181 253);
-}
-
-.font-violet-300 {
-    color: rgb(196 181 253);
-}
-
-.hover\:bg-violet-400:hover{
-    background-color: rgb(167 139 250);
-}
-
-.Logo {
-    color: white;
-    font-weight: 700;
+.img-product {
+    transition-duration: 3s;
+    overflow: hidden;
+    width: 310px;
+    height: 350px;
+    position: relative;
+    border-radius: 20px;
+    border: none;
+    padding: 1vw;
     display: inline-block;
+    margin-left: 1vw;
 }
 
-.hover\:bg-gray:hover {
-    background-color: #d9d4da;
-    opacity:0.1;
+.img-product:hover {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    z-index: 0;
+    -webkit-filter: brightness(50%);
+    filter: brightness(20%);
+    cursor: pointer;
 }
 
-.mr-16{
-    margin-right:16px;
+.box {
+    width: 300px;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    height: 350px;
+    position: relative;
+    text-align: center;
 }
 
-.mr-9 {
-    margin-right: 9px;
+
+#text {
+    position: absolute;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    margin-top: -185px;
+    padding: 0;
+    width: 300px;
+    height: 175px;
+    margin-left: 1vw;
+    opacity: 0;
 }
 
-.items-center {
-    align-items: center;
+.img-product:hover + #text {
+    opacity: 0.7;
 }
 
-.font-medium {
-    font-weight: 400;
+#text:hover {
+    opacity: 0.7;
 }
 
-.font-extrabold {
-    font-weight: 800;
-    text-decoration-style:solid;
-}
-
-.ring-4 {
-    border-color: rgb(196 181 253);
-}

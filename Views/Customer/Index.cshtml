@@ -5,12 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<head>
+    <title>Postacie</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="customer-body">
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table-light">
     <thead>
         <tr>
             <th>
@@ -88,3 +93,4 @@
 }
     </tbody>
 </table>
+</body>
