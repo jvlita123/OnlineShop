@@ -1,5 +1,6 @@
 ﻿@model X.PagedList.IPagedList<Sklep_MVC_Projekt.Models.Product>
 @using X.PagedList.Mvc.Core
+@inject IHttpContextAccessor HttpContextAccessor
 @{
 	ViewData["Title"] = "Products";
 }
@@ -23,7 +24,6 @@
 		<th>
 			Price
 		</th>
-		<th></th>
 	</tr>
 </table>
 
@@ -39,18 +39,21 @@
 				}
 				<div id="text">
 					@Html.DisplayFor(modelItem => item.ProductName)
-
 					@Html.DisplayFor(modelItem => item.Price)
 				</div>
+				@if (@HttpContextAccessor.HttpContext.User.IsInRole("Admin"))
+				{
+				<div style="display:flex;">	<a style="margin-left:3vw" class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@item.ProductID"><img src="~/Photos/edit.png" style="height:30px;width:30px;"/></a>
+						<a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@item.ProductID"><img src="~/Photos/delete.png" style="height:30px;width:30px; "/></a>
+			</div>
+				}
 			</div>
 		</a>
-
 	}
-
 </div>
 
 <br />
-	Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+		Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
