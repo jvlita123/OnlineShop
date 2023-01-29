@@ -9,22 +9,24 @@ namespace Sklep_MVC_Projekt.Services
     {
         private readonly OrderRepository _orderRepository;
         private readonly ProductOrderRepository _productOrderRepository;
+        private readonly ProductRepository _productRepository;
 
-        public OrderService(OrderRepository orderRepository, ProductOrderRepository productOrderRepository)
+        public OrderService(OrderRepository orderRepository, ProductOrderRepository productOrderRepository, ProductRepository productRepository)
         {
             _orderRepository = orderRepository;
             _productOrderRepository = productOrderRepository;
+            _productRepository = productRepository; 
         }
 
         public List<Order> GetAll()
         {
-            var order = _orderRepository.GetAll().Include(o => o.Customer).Include(o => o.PaymentMethod).Include(o => o.ShippingMethod).Include(o => o.ProductOrders);
+            var order = _orderRepository.GetAll().Include(x => x.Customer).Include(x => x.PaymentMethod).Include(x => x.ShippingMethod).Include(x => x.ProductOrders);
             return order.ToList();
         }
 
         public Order GetById(int id)
         {
-            return _orderRepository.GetAll().Where(x => x.OrderID == id).FirstOrDefault();
+            return _orderRepository.GetAll().Where(x => x.OrderID == id).Include(x=>x.ProductOrders).FirstOrDefault();
         }
 
         public Order AddNewOrder(Order order)
@@ -39,7 +41,6 @@ namespace Sklep_MVC_Projekt.Services
                 ShippingMethodID = order.ShippingMethodID,
                 PaymentMethod = order.PaymentMethod,
                 PaymentMethodID = order.PaymentMethodID,
-                Price = order.Price,
                 Status = order.Status,
                 DeliveryAdressFlat = order.DeliveryAdressFlat,
                 DeliveryAdressBuilding = order.DeliveryAdressBuilding,
@@ -47,15 +48,17 @@ namespace Sklep_MVC_Projekt.Services
                 DeliveryAdressCity = order.DeliveryAdressCity,
                 DeliveryAdressCountry = order.DeliveryAdressCountry,
                 Postcode = order.Postcode,
+                Price= order.Price,
                 PhoneNumber = order.PhoneNumber,
+                ProductOrders= order.ProductOrders,
             };
 
             _orderRepository.AddAndSaveChanges(newOrder);
             return newOrder;
         }
-        public List<Order> GetCustomerOrders(int id)
+        public List<Order> GetCustomerOrders(string email)//!!!!!
         {
-            List<Order> list = _orderRepository.GetAll().Where(x => x.Customer.CustomerID == id).ToList();
+            List<Order> list = _orderRepository.GetAll().Where(x => x.Customer.IdentityUser.Email == email).ToList();
 
             return list;
         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sklep_MVC_Projekt.Data;
 
@@ -11,9 +12,10 @@ using Sklep_MVC_Projekt.Data;
 namespace Sklep_MVC_Projekt.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230127150046_4567")]
+    partial class _4567
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,7 +284,6 @@ namespace Sklep_MVC_Projekt.Migrations
 
                     b.Property<string>("Id")
                         .IsRequired()
-
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
@@ -514,29 +515,6 @@ namespace Sklep_MVC_Projekt.Migrations
                     b.ToTable("ShippingMethod");
                 });
 
-
-            modelBuilder.Entity("Sklep_MVC_Projekt.Models.ShopAttribute", b =>
-                {
-                    b.Property<int>("ShopAttributeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShopAttributeID"), 1L, 1);
-
-                    b.Property<string>("Attribute")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ShopAttributeID");
-
-                    b.ToTable("ShopAttributes");
-                });
-
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -592,7 +570,7 @@ namespace Sklep_MVC_Projekt.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("Id");
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -721,6 +699,7 @@ namespace Sklep_MVC_Projekt.Migrations
                 {
                     b.Navigation("Orders");
                 });
+#pragma warning restore 612, 618
         }
     }
 }

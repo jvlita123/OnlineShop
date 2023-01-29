@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Sklep_MVC_Projekt.Models;
+﻿using Sklep_MVC_Projekt.Models;
 using Sklep_MVC_Projekt.Repositories;
 
 namespace Sklep_MVC_Projekt.Services
@@ -15,7 +14,7 @@ namespace Sklep_MVC_Projekt.Services
 
         public List<Customer> GetAll()
         {
-            return _customerRepository.GetAll().Include(x=>x.IdentityUser).ToList();
+            return _customerRepository.GetAll().ToList();
         }
 
         public Customer GetByEmail(string email)
@@ -23,7 +22,22 @@ namespace Sklep_MVC_Projekt.Services
             return _customerRepository.GetAll().Where(x => x.Email == email).FirstOrDefault();
         }
 
-        public Customer Add(Customer customer)
+        public Customer GetById(int id)
+        {
+            return _customerRepository.GetAll().Where(x => x.CustomerID == id).FirstOrDefault();
+        }
+
+        public void Update(Customer customer)
+        {
+            _customerRepository.Update(customer);
+        }
+
+        public void SaveChanges()
+        {
+            _customerRepository.SaveChanges();
+        }
+
+        public Customer AddNewCustomer(Customer customer)
         {
             Customer newCustomer = _customerRepository.AddAndSaveChanges(customer);
 

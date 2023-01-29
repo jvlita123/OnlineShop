@@ -40,6 +40,10 @@ namespace Sklep_MVC_Projekt.Models
         [EmailAddress]
         public string Email { get; set; }
 
+        [Display(Name ="Id")]
+        public String Id { get; set; }
+
+
         [ForeignKey("Id")]
         public virtual IdentityUser? IdentityUser { get; set; }
 

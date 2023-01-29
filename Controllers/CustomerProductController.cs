@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Sklep_MVC_Projekt.Models;
@@ -34,6 +35,7 @@ namespace Sklep_MVC_Projekt.Controllers
             return View(customerProducts.ToList());
         }
 
+        [Authorize]
         public IActionResult AddCustomerProduct(int id)
         {
             CustomerProduct customerProduct = new CustomerProduct();
