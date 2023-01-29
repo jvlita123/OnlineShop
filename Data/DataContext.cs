@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Sklep_MVC_Projekt.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace Sklep_MVC_Projekt.Data
 {
@@ -17,6 +18,7 @@ namespace Sklep_MVC_Projekt.Data
         public DbSet<PaymentMethod> PaymentMethod { get; set; }
         public DbSet<ProductOrder> ProductOrder { get; set; }
         public DbSet<CustomerProduct> CustomerProduct { get; set; }
+        public DbSet<ShopAttribute> ShopAttributes { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)

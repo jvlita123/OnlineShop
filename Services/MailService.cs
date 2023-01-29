@@ -8,7 +8,7 @@ namespace Sklep_MVC_Projekt.Services
         public void SendEmail(string body, string subject, string emailAddress, string name)
         {
             string email = "mvcshopemailer@gmail.com";
-            string password = "lubieplacki";
+            string password = "zkrfzssmtuvrblua";
 
             SmtpClient client = new SmtpClient()
             {
