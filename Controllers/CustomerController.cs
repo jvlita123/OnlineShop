@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sklep_MVC_Projekt.Models;
 using Sklep_MVC_Projekt.Services;
@@ -19,6 +20,7 @@ namespace Sklep_MVC_Projekt.Controllers
         }
 
         // GET: CustomerController
+        [Authorize(Roles ="Admin")]
         public ActionResult Index()
         {
             return View(_customerService.GetAll().ToList());
