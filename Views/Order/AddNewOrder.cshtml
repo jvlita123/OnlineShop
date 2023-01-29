@@ -1,0 +1,81 @@
+﻿@model Sklep_MVC_Projekt.Models.Order
+@{
+    ViewData["Title"] = "AddNewOrder";
+}
+
+<h1>AddNewOrder</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddNewOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="OrderID" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Status" class="form-control" value="In progress" />
+            </div>
+            <div class="form-group">
+                <input type = "hidden" asp-for="CustomerID" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingMethodID" class="control-label"></label>
+                @Html.DropDownList("ShippingMethodID", null, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="ShippingMethodID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentMethodID" class="control-label"></label>
+                @Html.DropDownList("PaymentMethodID", null, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="PaymentMethodID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryAdressFlat" class="control-label"></label>
+                <input asp-for="DeliveryAdressFlat" class="form-control" />
+                <span asp-validation-for="DeliveryAdressFlat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryAdressBuilding" class="control-label"></label>
+                <input asp-for="DeliveryAdressBuilding" class="form-control" />
+                <span asp-validation-for="DeliveryAdressBuilding" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryAdressStreet" class="control-label"></label>
+                <input asp-for="DeliveryAdressStreet" class="form-control" />
+                <span asp-validation-for="DeliveryAdressStreet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryAdressCity" class="control-label"></label>
+                <input asp-for="DeliveryAdressCity" class="form-control" />
+                <span asp-validation-for="DeliveryAdressCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryAdressCountry" class="control-label"></label>
+                <input asp-for="DeliveryAdressCountry" class="form-control" />
+                <span asp-validation-for="DeliveryAdressCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Postcode" class="control-label"></label>
+                <input asp-for="Postcode" class="form-control" />
+                <span asp-validation-for="Postcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

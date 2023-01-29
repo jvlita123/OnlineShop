@@ -36,9 +36,9 @@ namespace Sklep_MVC_Projekt.Services
             return _customerProductRepository.GetById(id);
         }
 
-        public List<CustomerProduct> CustomerProducts(int id)
+        public List<CustomerProduct> CustomerProducts(string email)
         {
-            List<CustomerProduct> list = _customerProductRepository.GetAll().Include(x=>x.Product.Photo).Include(x=>x.Customer).Include(x=>x.Product).Where(x => x.Customer.CustomerID == id).ToList();
+            List<CustomerProduct> list = _customerProductRepository.GetAll().Include(x=>x.Product.Photo).Include(x=>x.Customer).Include(x=>x.Product).Include(x=>x.Customer.IdentityUser).Where(x => x.Customer.IdentityUser.Email == email).ToList();
 
             return list;
         }

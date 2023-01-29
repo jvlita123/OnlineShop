@@ -19,7 +19,7 @@ namespace Sklep_MVC_Projekt.Services
         }
         public Product GetById(int id)
         {
-            return _productRepository.GetById(id);
+            return _productRepository.GetAll().Include(x=>x.Photo).Where(x=>x.ProductID == id).FirstOrDefault();
         }
 
         public Product AddNewProduct(Product product)
@@ -48,7 +48,11 @@ namespace Sklep_MVC_Projekt.Services
 
         public void SaveChanges()
         {
-            _productRepository.SaveChanges();
+           _productRepository.SaveChanges();
+        }
+        public void Update(Product product)
+        {
+            _productRepository.Update(product);
         }
 
         public void UpdateAndSaveChanges(Product product)

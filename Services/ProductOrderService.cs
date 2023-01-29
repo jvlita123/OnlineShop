@@ -7,15 +7,17 @@ namespace Sklep_MVC_Projekt.Services
     public class ProductOrderService
     {
         private readonly ProductOrderRepository _productOrderRepository;
+        private readonly OrderRepository _orderRepository;
 
-        public ProductOrderService(ProductOrderRepository productOrderRepository)
+        public ProductOrderService(ProductOrderRepository productOrderRepository, OrderRepository orderRepository)
         {
             _productOrderRepository = productOrderRepository;
+            _orderRepository = orderRepository; 
         }
 
         public List<ProductOrder> GetAll()
         {
-            return _productOrderRepository.GetAll().Include("Product").Include("Order").ToList();
+            return _productOrderRepository.GetAll().Include(x=>x.Product).Include(x=>x.Order).Include(x=>x.Product.Photo).ToList();
         }
 
         public List<ProductOrder> GetById(int id)
@@ -32,6 +34,7 @@ namespace Sklep_MVC_Projekt.Services
                 OrderID = productOrder.OrderID,
                 Order = productOrder.Order,
             };
+
             _productOrderRepository.AddAndSaveChanges(newProductOrder);
             return newProductOrder;
         }
