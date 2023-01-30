@@ -44,6 +44,12 @@ builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<ShippingMethodRepository>();
 builder.Services.AddScoped<ShippingMethodService>();
+builder.Services.AddScoped<CurrencyService>();
+builder.Services.AddScoped<ShopAttributeRepository>();
+builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<MailService>();
+builder.Services.AddSession();
+builder.Services.AddMvc();
 
 var app = builder.Build();
 
@@ -63,7 +69,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
