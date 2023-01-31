@@ -20,9 +20,9 @@ namespace Sklep_MVC_Projekt.Services
             return _productOrderRepository.GetAll().Include(x=>x.Product).Include(x=>x.Order).Include(x=>x.Product.Photo).ToList();
         }
 
-        public List<ProductOrder> GetById(int id)
+        public ProductOrder GetById(int id)
         {
-            return _productOrderRepository.GetAll().Where(x => x.ProductOrderID == id).Include("Product").Include("Order").ToList();
+            return _productOrderRepository.GetAll().Where(x => x.ProductOrderID == id).Include("Product").Include("Order").FirstOrDefault();
         }
 
         public ProductOrder AddProductOrder(ProductOrder productOrder)

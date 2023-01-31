@@ -67,9 +67,15 @@ namespace Sklep_MVC_Projekt.Services
         {
             _orderRepository.SaveChanges();
         }
+
         public void UpdateAndSaveChanges(Order order)
         {
             _orderRepository.UpdateAndSaveChanges(order);
         }
-    }
+
+		public void Update(Order order)
+		{
+			_orderRepository.Update(order);
+		}
+	}
 }

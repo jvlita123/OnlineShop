@@ -90,10 +90,9 @@
             </td>
             <td>
                     <div style="display:flex;">
-                        <a style="margin-left:3vw" class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Edit" asp-route-id="@item.OrderID"><img src="~/Photos/edit.png" style="height:30px;width:30px;" /></a>
                         <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Details" asp-route-id="@item.OrderID"><img src="~/Photos/delete.png" style="height:30px;width:30px; " /></a>
-                        <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Accept" asp-route-id="@item.OrderID"><img src="~/Photos/accept.png" style="height:30px;width:30px; " /></a>
-                        <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Reject" asp-route-id="@item.OrderID"><img src="~/Photos/reject.png" style="height:30px;width:30px; " /></a>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ChangeStatus" asp-route-id="@item.OrderID" asp-route-status="Accepted"><img src="~/Photos/accept.png" style="height:30px;width:30px; " /></a>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ChangeStatus" asp-route-id="@item.OrderID" asp-route-status="Rejected"><img src="~/Photos/reject.png" style="height:30px;width:30px; " /></a>
                     </div>
             </td>
         </tr>
