@@ -1,64 +1,65 @@
-﻿@model X.PagedList.IPagedList<Sklep_MVC_Projekt.Models.Product>
+@model X.PagedList.IPagedList<Sklep_MVC_Projekt.Models.Product>
 @using X.PagedList.Mvc.Core
 @inject IHttpContextAccessor HttpContextAccessor
 @{
 	ViewData["Title"] = "Products";
 }
+<head>
 
-<p>
-	<a asp-action="AddNewProduct">Add New Product</a>
-</p>
-
-@using (Html.BeginForm("Index", "Product", FormMethod.Get))
-{
 	<p>
-		Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-		<input type="submit" value="Search" />
+		<a asp-action="AddNewProduct">Add New Product</a>
 	</p>
-}
-<table class="table">
-	<tr>
-		<th>
-			@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter=ViewBag.CurrentFilter })
-		</th>
-		<th>
-			Price
-		</th>
-	</tr>
-</table>
+</head>
+<body>
 
-<div class="container-products">
-	@foreach (var item in Model)
+	@using (Html.BeginForm("Index", "Product", FormMethod.Get))
 	{
-		<a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="ProductDetails" asp-route-id="@item.ProductID">
-			<div class="box">
-
-				@if (item.Photo.Count > 0)
-				{
-					<img class="img-product" src="~/Photos/@item.Photo.FirstOrDefault().Path" height="50" width="50" alt="zdjecie"/>
-				}
-				<div class="text">
-					
-					@Html.DisplayFor(modelItem => item.ProductName)
-
-					@Html.DisplayFor(modelItem => item.Price)
-				</div>
-				@if (@HttpContextAccessor.HttpContext.User.IsInRole("Admin"))
-				{
-				<div style="display:flex;">	<a style="margin-left:3vw" class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@item.ProductID"><img src="~/Photos/edit.png" style="height:30px;width:30px;"/></a>
-						<a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@item.ProductID"><img src="~/Photos/delete.png" style="height:30px;width:30px; "/></a>
-			</div>
-				}
-			</div>
-		</a>
+		<p class='w3-input w3-border'>
+			Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+			<input type="submit" value="Search" />
+		</p>
 	}
-</div>
+	<table class="table">
+		<tr>
+			<th>
+				@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter=ViewBag.CurrentFilter })
+			</th>
+		</tr>
+	</table>
+	<div class="container-products">
+		@foreach (var item in Model)
+		{
+			<a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="ProductDetails" asp-route-id="@item.ProductID">
+				<div class="box">
 
-<br />
+					@if (item.Photo.Count > 0)
+					{
+						<img class="img-product" src="~/Photos/@item.Photo.FirstOrDefault().Path" height="50" width="50" />
+					}
+					<div id="text">
+						@Html.DisplayFor(modelItem => item.ProductName)
+						@Html.DisplayFor(modelItem => item.Price)
+					</div>
+					@if (@HttpContextAccessor.HttpContext.User.IsInRole("Admin"))
+					{
+						<div style="display:flex;">
+							<a style="margin-left:3vw" class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@item.ProductID"><img src="~/Photos/edit.png" style="height:30px;width:30px;" /></a>
+							<a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@item.ProductID"><img src="~/Photos/delete.png" style="height:30px;width:30px; " /></a>
+						</div>
+					}
+				</div>
+			</a>
+		}
+	</div>
+
+	<br />
+	<div id="pager">
 		Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+		@Html.PagedListPager(Model, page => Url.Action("Index",
+		new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+	</div>
+</body>
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 @*
 
