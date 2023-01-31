@@ -11,5 +11,10 @@ namespace Sklep_MVC_Projekt.Repositories
         {
             _dataContext = context;
         }
+
+        public List<Product> GetNewAndPromoProducts()
+        {
+            return _dataContext.Product.Where(e => e.IsNew || e.IsOnSale).ToList();
+        }
     }
 }

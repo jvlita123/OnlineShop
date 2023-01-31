@@ -35,10 +35,12 @@
 
 				@if (item.Photo.Count > 0)
 				{
-					<img class="img-product" src="~/Photos/@item.Photo.FirstOrDefault().Path" height="50" width="50" />
+					<img class="img-product" src="~/Photos/@item.Photo.FirstOrDefault().Path" height="50" width="50" alt="zdjecie"/>
 				}
-				<div id="text">
+				<div class="text">
+					
 					@Html.DisplayFor(modelItem => item.ProductName)
+
 					@Html.DisplayFor(modelItem => item.Price)
 				</div>
 				@if (@HttpContextAccessor.HttpContext.User.IsInRole("Admin"))

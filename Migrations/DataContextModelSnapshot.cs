@@ -593,8 +593,8 @@ namespace Sklep_MVC_Projekt.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("Id");
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        //.OnDelete(DeleteBehavior.Cascade)
+                       // .IsRequired();
 
                     b.Navigation("IdentityUser");
                 });

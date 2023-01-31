@@ -11,5 +11,10 @@ namespace Sklep_MVC_Projekt.Repositories
         {
             _dataContext = context;
         }
+
+        public List<Customer> NewsletterCustomers()
+        {
+            return _dataContext.Customer.Where(e => e.Newsletter).ToList();
+        }
     }
 }

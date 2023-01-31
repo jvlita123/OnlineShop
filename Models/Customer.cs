@@ -43,6 +43,9 @@ namespace Sklep_MVC_Projekt.Models
         [Display(Name ="Id")]
         public String Id { get; set; }
 
+        [Display(Name = "Newsletter")]
+        public bool Newsletter { get; set; } = false;
+
 
         [ForeignKey("Id")]
         public virtual IdentityUser? IdentityUser { get; set; }

@@ -12,6 +12,10 @@ namespace Sklep_MVC_Projekt.Services
             _customerRepository = customerRepository;
         }
 
+        public List<Customer> NewsletterCustomers()
+        {
+            return _customerRepository.NewsletterCustomers();
+        }
         public List<Customer> GetAll()
         {
             return _customerRepository.GetAll().ToList();
@@ -38,6 +42,13 @@ namespace Sklep_MVC_Projekt.Services
         }
 
         public Customer AddNewCustomer(Customer customer)
+        {
+            Customer newCustomer = _customerRepository.AddAndSaveChanges(customer);
+
+            return newCustomer;
+        }
+
+        public Customer Add(Customer customer)
         {
             Customer newCustomer = _customerRepository.AddAndSaveChanges(customer);
 

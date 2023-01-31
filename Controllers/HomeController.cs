@@ -35,7 +35,7 @@ namespace Sklep_MVC_Projekt.Controllers
                 HttpContext.Session.SetString("Visited", "Yes");
             }
 
-            _mailService.SendEmail("<h1>aaaaaaaaa</h1>","NIECH DZIALA", "funkowski.krzysztof@gmail.com", "Krzysztof Funkowski");
+            _mailService.SendNewsletterNewAndPromo();
             Console.WriteLine(_adminService.GetVisitCounter());
             return View();
         }

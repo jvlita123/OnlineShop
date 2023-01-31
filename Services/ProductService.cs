@@ -13,6 +13,10 @@ namespace Sklep_MVC_Projekt.Services
             _productRepository = productRepository;
         }
 
+        public List<Product> GetNewAndPromoProducts()
+        {
+            return _productRepository.GetNewAndPromoProducts();
+        }
         public List<Product> GetAll()
         {
             return _productRepository.GetAll().Include(x=>x.Photo).ToList();
