@@ -12,8 +12,8 @@ using Sklep_MVC_Projekt.Data;
 namespace Sklep_MVC_Projekt.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230128131834_xd")]
-    partial class xd
+    [Migration("20230131101138_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -286,10 +286,13 @@ namespace Sklep_MVC_Projekt.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Newsletter")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Postcode")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.HasKey("CustomerID");
 
@@ -447,6 +450,9 @@ namespace Sklep_MVC_Projekt.Migrations
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -457,12 +463,15 @@ namespace Sklep_MVC_Projekt.Migrations
                     b.Property<bool>("IsOnSale")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SaleEndDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ProductID");
 
@@ -509,6 +518,27 @@ namespace Sklep_MVC_Projekt.Migrations
                     b.HasKey("ShippingMethodID");
 
                     b.ToTable("ShippingMethod");
+                });
+
+            modelBuilder.Entity("Sklep_MVC_Projekt.Models.ShopAttribute", b =>
+                {
+                    b.Property<int>("ShopAttributeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShopAttributeID"), 1L, 1);
+
+                    b.Property<string>("Attribute")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ShopAttributeID");
+
+                    b.ToTable("ShopAttributes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

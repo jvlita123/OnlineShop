@@ -167,12 +167,10 @@ namespace Sklep_MVC_Projekt.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -209,12 +207,10 @@ namespace Sklep_MVC_Projekt.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -282,12 +278,14 @@ namespace Sklep_MVC_Projekt.Migrations
 
                     b.Property<string>("Id")
                         .IsRequired()
-
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Newsletter")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Postcode")
                         .IsRequired()
@@ -450,6 +448,9 @@ namespace Sklep_MVC_Projekt.Migrations
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -460,12 +461,15 @@ namespace Sklep_MVC_Projekt.Migrations
                     b.Property<bool>("IsOnSale")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SaleEndDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ProductID");
 
@@ -514,7 +518,6 @@ namespace Sklep_MVC_Projekt.Migrations
                     b.ToTable("ShippingMethod");
                 });
 
-
             modelBuilder.Entity("Sklep_MVC_Projekt.Models.ShopAttribute", b =>
                 {
                     b.Property<int>("ShopAttributeID")
@@ -535,7 +538,6 @@ namespace Sklep_MVC_Projekt.Migrations
 
                     b.ToTable("ShopAttributes");
                 });
-
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -592,9 +594,9 @@ namespace Sklep_MVC_Projekt.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("Id");
-                        //.OnDelete(DeleteBehavior.Cascade)
-                       // .IsRequired();
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("IdentityUser");
                 });
@@ -721,6 +723,7 @@ namespace Sklep_MVC_Projekt.Migrations
                 {
                     b.Navigation("Orders");
                 });
+#pragma warning restore 612, 618
         }
     }
 }

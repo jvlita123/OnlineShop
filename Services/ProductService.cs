@@ -63,5 +63,19 @@ namespace Sklep_MVC_Projekt.Services
         {
             _productRepository.UpdateAndSaveChanges(product);
         }
+
+        public List<Product> Nowosci()
+        {
+            
+            return _productRepository.GetNowosci();
+
+        }
+
+        public List<Product> Promocje()
+        {
+
+            return _productRepository.GetPromo();
+
+        }
     }
 }

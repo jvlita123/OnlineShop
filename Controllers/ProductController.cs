@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Sklep_MVC_Projekt.Models;
 using Sklep_MVC_Projekt.Services;
 using System.Collections.Generic;
@@ -53,6 +54,8 @@ namespace Sklep_MVC_Projekt.Controllers
 
             int pageSize = 4;
             int pageNumber = (page ?? 1);
+            SetIsNew(products);
+            SetIsOnSale(products);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
 
@@ -108,6 +111,46 @@ namespace Sklep_MVC_Projekt.Controllers
             _productService.Update(p);
             _productService.SaveChanges();
             return View(product);
+        }
+
+
+        public IActionResult Nowo()
+        {
+            var products = _productService.GetAll().ToList();
+            SetIsNew(products);
+            return View(_productService.Nowosci());
+        }
+
+        public IActionResult Promo()
+        {
+            var products = _productService.GetAll().ToList();
+            SetIsOnSale(products);
+            return View(_productService.Promocje());
+        }
+
+
+        private void SetIsNew(List<Product> products)
+        {
+            var now = DateTime.Now;
+            var numberOfNewProducts = 10;
+
+            for (var i = 0; i < products.Count && i < numberOfNewProducts; i++)
+            {
+                products[i].IsNew = true;
+            }
+        }
+
+        private void SetIsOnSale(List<Product> products)
+        {
+            var now = DateTime.Now;
+
+            foreach (var product in products)
+            {
+                if (product.SaleEndDate >= now)
+                {
+                    product.Price = product.Price * 0.9m;
+                }
+            }
         }
     }
 }
