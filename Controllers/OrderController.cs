@@ -81,6 +81,7 @@ namespace Sklep_MVC_Projekt.Controllers
             return RedirectToAction("Details", new { id = order.OrderID });
 
         }
+
         public ActionResult GetCustomerOrders()
         {
             List<Order> orders = _orderService.GetCustomerOrders(HttpContext.User.Identity.Name);
@@ -93,6 +94,16 @@ namespace Sklep_MVC_Projekt.Controllers
             order.ProductOrders = _productOrderService.GetAll().Where(x => x.OrderID == id).ToList();
 
             return View(order);
+        }
+
+		public IActionResult ChangeStatus(int id, string status)
+		{
+			Order order = _orderService.GetById(id);
+            order.Status = status;
+
+			_orderService.Update(order);
+			_orderService.SaveChanges();
+            return RedirectToAction("Index", "Order");
         }
     }
 }

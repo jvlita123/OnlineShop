@@ -6,7 +6,7 @@
 }
 
 <head>
-	<title>Postacie</title>
+	<title>Customers</title>
 	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -41,9 +41,6 @@
 					<div class="text-black link-dark">
 						@Html.DisplayNameFor(model => model.Email)
 					</div>
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.IdentityUser)
 				</th>
 				<th></th>
 			</tr>
@@ -80,11 +77,7 @@
 						@Html.DisplayFor(modelItem => item.Email)
 					</td>
 					<td>
-						@Html.DisplayFor(modelItem => item.IdentityUser.Id)
-					</td>
-					<td>
 						<div style="display:flex;">
-							<a style="margin-left:3vw" class="nav-link text-light" asp-area="" asp-controller="Customer" asp-action="Delete" asp-route-id="@item.CustomerID"><img src="~/Photos/edit.png" style="height:30px;width:30px;" /></a>
 							<a class="nav-link text-light" asp-area="" asp-controller="Customer" asp-action="EditCustomer" asp-route-id="@item.CustomerID"><img src="~/Photos/delete.png" style="height:30px;width:30px; " /></a>
 							<a class="nav-link text-light" asp-area="" asp-controller="Customer" asp-action="Details" asp-route-id="@item.CustomerID"><img src="~/Photos/Details.png" style="height:30px;width:30px; " /></a>
 						</div>
