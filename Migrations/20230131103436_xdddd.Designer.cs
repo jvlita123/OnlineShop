@@ -12,8 +12,8 @@ using Sklep_MVC_Projekt.Data;
 namespace Sklep_MVC_Projekt.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230131101138_init")]
-    partial class init
+    [Migration("20230131103436_xdddd")]
+    partial class xdddd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

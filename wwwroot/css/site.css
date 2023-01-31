@@ -48,7 +48,6 @@ body {
     background-attachment: scroll;
 }
 
-
 .my-navbar {
     position: relative;
     color: white;
@@ -151,8 +150,10 @@ body {
 a:visited a{
     text-decoration:none;
     color: black;
+    opacity:1;
 }
 a{
     text-decoration:none;
     color:black;
+    opacity:1;
 }

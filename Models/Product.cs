@@ -27,7 +27,9 @@ namespace Sklep_MVC_Projekt.Models
         }
 
         public DateTime DateAdded { get; set; }
-        public DateTime SaleEndDate { get; internal set; }
+
+        public DateTime SaleEndDate { get;  set; }
+
         public bool IsNew { get; set; }
 
         public bool IsOnSale { get; set; }

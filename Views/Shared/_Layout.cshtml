@@ -37,6 +37,16 @@
 							<li class="nav-item">
 								<a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="GetCustomerOrders">My orders</a>
 							</li>
+							<li class="nav-item">
+								<a class="nav-link text-light" asp-area="" asp-controller="Customer" asp-action="Question">Ask Question</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="Nowo">New</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="Promo">Promo</a>
+							</li>
+
 							@if (HttpContextAccessor.HttpContext.User.IsInRole("Admin"))
 							{
 								<li class="nav-item">
@@ -58,11 +68,7 @@
 		</main>
 	</div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Sklep_MVC_Projekt - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

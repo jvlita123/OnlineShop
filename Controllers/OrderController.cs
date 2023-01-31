@@ -5,6 +5,7 @@ using Sklep_MVC_Projekt.Models;
 using Sklep_MVC_Projekt.Repositories;
 using Sklep_MVC_Projekt.Services;
 using System.Net;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Sklep_MVC_Projekt.Controllers
 {
@@ -15,12 +16,13 @@ namespace Sklep_MVC_Projekt.Controllers
         private ProductOrderService _productOrderService;
         private CategoryService _categoryService;
         private OrderService _orderService;
+        private MailService _mailService;
         private CustomerService _customerService;
         private CustomerProductService _customerProductService;
         private PaymentMethodService _paymentMethodService;
         private ShippingMethodService _shippingMethodService;
 
-        public OrderController(ProductService productService, CategoryService categoryService, OrderService orderService, CustomerService customerService, CustomerProductService customerProductService, ProductOrderService productOrderService, PaymentMethodService paymentMethodService, ShippingMethodService shippingMethodService)
+        public OrderController(ProductService productService, CategoryService categoryService, OrderService orderService, CustomerService customerService, CustomerProductService customerProductService, ProductOrderService productOrderService, PaymentMethodService paymentMethodService, ShippingMethodService shippingMethodService,MailService mailService)
         {
             _productService = productService;
             _categoryService = categoryService;
@@ -30,6 +32,7 @@ namespace Sklep_MVC_Projekt.Controllers
             _productOrderService = productOrderService;
             _paymentMethodService = paymentMethodService;
             _shippingMethodService = shippingMethodService;
+            _mailService = mailService;
         }
         public ActionResult Index()
         {
@@ -78,10 +81,10 @@ namespace Sklep_MVC_Projekt.Controllers
             _orderService.UpdateAndSaveChanges(order);
             _customerProductService.DeleteAll(customerProductsList);
 
+            _mailService.SendEmail($"<h1>Zamówienie nr: {order.OrderID}</h1><br /><h3>Zostało przyjęte do realizacji.</h3>", "Dziękujemy za złożenie zamówienia w naszym sklepie", "mvcshopemailer@gmail.com", HttpContext.User.Identity.Name);
+
             return RedirectToAction("Details", new { id = order.OrderID });
-
         }
-
         public ActionResult GetCustomerOrders()
         {
             List<Order> orders = _orderService.GetCustomerOrders(HttpContext.User.Identity.Name);

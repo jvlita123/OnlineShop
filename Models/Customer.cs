@@ -46,8 +46,10 @@ namespace Sklep_MVC_Projekt.Models
         [Display(Name = "Newsletter")]
         public bool Newsletter { get; set; } = false;
 
+		[Display(Name = "Currency")]
+		public string Currency { get; set; }
 
-        [ForeignKey("Id")]
+		[ForeignKey("Id")]
         public virtual IdentityUser? IdentityUser { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }

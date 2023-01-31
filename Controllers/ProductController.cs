@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Sklep_MVC_Projekt.Models;
 using Sklep_MVC_Projekt.Services;
@@ -12,18 +13,26 @@ namespace Sklep_MVC_Projekt.Controllers
     public class ProductController : Controller
     {
         private ProductService _productService;
+        private CurrencyService _currencyService;
+        private CustomerService _customerService;
 
-        public ProductController(ProductService productService)
+        public ProductController(ProductService productService, CurrencyService currencyService, CustomerService customerService)
         {
             _productService = productService;
+            _currencyService = currencyService;
+            _customerService = customerService;
         }
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+		public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page,string Currency)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
 
-            var products = _productService.GetAll().ToList();
+
+			//List<string> currency = _currencyService.GetCurrency();
+			//ViewBag.Currency = new SelectList(currency, "Currency", "Name", Currency);
+
+			var products = _productService.GetAll().ToList();
 
             if (searchString != null)
             {
@@ -52,7 +61,7 @@ namespace Sklep_MVC_Projekt.Controllers
                     break;
             }
 
-            int pageSize = 4;
+			int pageSize = 4;
             int pageNumber = (page ?? 1);
             SetIsNew(products);
             SetIsOnSale(products);
@@ -105,6 +114,9 @@ namespace Sklep_MVC_Projekt.Controllers
             p.ProductName = product.ProductName;
             p.Price= product.Price;
             p.Description= product.Description;
+            p.DateAdded=product.DateAdded;
+            p.SaleEndDate=product.SaleEndDate;  
+            p.CategoryID= product.CategoryID;
             p.IsNew= product.IsNew;
             p.IsOnSale= product.IsOnSale;
 
@@ -113,21 +125,19 @@ namespace Sklep_MVC_Projekt.Controllers
             return View(product);
         }
 
-
         public IActionResult Nowo()
         {
-            var products = _productService.GetAll().ToList();
+            var products = _productService.GetAll().OrderByDescending(p => p.DateAdded).Take(10).ToList();
             SetIsNew(products);
-            return View(_productService.Nowosci());
+            return View(products);
         }
 
         public IActionResult Promo()
         {
             var products = _productService.GetAll().ToList();
             SetIsOnSale(products);
-            return View(_productService.Promocje());
+            return View(products);
         }
-
 
         private void SetIsNew(List<Product> products)
         {
@@ -140,17 +150,22 @@ namespace Sklep_MVC_Projekt.Controllers
             }
         }
 
-        private void SetIsOnSale(List<Product> products)
-        {
-            var now = DateTime.Now;
+		private void SetIsOnSale(List<Product> products)
+		{
+			var now = DateTime.Now;
 
-            foreach (var product in products)
-            {
-                if (product.SaleEndDate >= now)
-                {
-                    product.Price = product.Price * 0.9m;
-                }
-            }
-        }
-    }
+			foreach (var product in products)
+			{
+				if (product.SaleEndDate >= now)
+				{
+					product.IsOnSale = true;
+					product.Price = product.Price * 0.9m;
+				}
+				else
+				{
+					product.IsOnSale = false;
+				}
+			}
+		}
+	}
 }

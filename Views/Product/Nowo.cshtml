@@ -1,31 +1,78 @@
-﻿@model IEnumerable<Product>
+﻿@model IEnumerable<Sklep_MVC_Projekt.Models.Product>
 
-<h2>New Products</h2>
+@{
+    ViewData["Title"] = "Nowo";
+}
+
+<h1>Nowo</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsNew)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOnSale)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailableAmmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryID)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var product in Model.Where(p => p.IsNew))
-        {
-            <tr>
-                @if (product.Photo.Count > 0)
-                {
-                    <img class="img-product" src="~/Photos/@product.Photo.FirstOrDefault().Path" height="50" width="50" alt="zdjecie" />
-                }
-                <div class="text">
-
-                    @Html.DisplayFor(modelItem => product.ProductName)
-
-                    @Html.DisplayFor(modelItem => product.Price)
-                </div>
-
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaleEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsNew)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOnSale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailableAmmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-
