@@ -1,4 +1,4 @@
-﻿@model X.PagedList.IPagedList<Sklep_MVC_Projekt.Models.Product>
+@model X.PagedList.IPagedList<Sklep_MVC_Projekt.Models.Product>
 @using X.PagedList.Mvc.Core
 @inject IHttpContextAccessor HttpContextAccessor
 @{
@@ -26,7 +26,6 @@
 			</th>
 		</tr>
 	</table>
-
 	<div class="container-products">
 		@foreach (var item in Model)
 		{

@@ -1,10 +1,18 @@
 ﻿using System.Net.Mail;
 using System.Net;
+using System.Text;
 
 namespace Sklep_MVC_Projekt.Services
 {
     public class MailService
     {
+        private readonly CustomerService _customerService;
+        private readonly ProductService _productService;
+        public MailService(CustomerService customerService, ProductService productService)
+        {
+            _customerService = customerService;
+            _productService = productService;
+        }
         public void SendEmail(string body, string subject, string emailAddress, string name)
         {
             string email = "mvcshopemailer@gmail.com";
@@ -46,6 +54,22 @@ namespace Sklep_MVC_Projekt.Services
             {
                 Console.WriteLine(ex.Message);
                 throw;
+            }
+        }
+
+        public void SendNewsletterNewAndPromo()
+        {
+            var products = _productService.GetNewAndPromoProducts();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<h1>ZOBACZ PROMOCJE I NOWOŚCI</h1><br /><ul>");
+            products.ForEach(p => { sb.Append($"<li>{p.ProductName} - {p.Price}</li>"); });
+            sb.Append("</ul>");
+
+            var customers = _customerService.NewsletterCustomers();
+
+            foreach (var customer in customers)
+            {
+                SendEmail(sb.ToString(), "Newsletter", customer.Email, $"{customer.FirstName} {customer.LastName}");
             }
         }
     }

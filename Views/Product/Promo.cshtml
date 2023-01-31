@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Product>
+
+<h2>Products on Sale</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Where(p => p.IsOnSale))
+        {
+            <tr>
+                @if (product.Photo.Count > 0)
+                {
+                    <img class="img-product" src="~/Photos/@product.Photo.FirstOrDefault().Path" height="50" width="50" alt="zdjecie" />
+                }
+                <div class="text">
+
+                    @Html.DisplayFor(modelItem => product.ProductName)
+
+                    @Html.DisplayFor(modelItem => product.Price)
+                </div>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -12,11 +12,21 @@ namespace Sklep_MVC_Projekt.Controllers
         private CustomerService _customerService;
         private ProductService _productService;
 
-        public CustomerController(CustomerProductService customerProductService, CustomerService customerService, ProductService productService)
+        private readonly MailService _mailService;
+
+        public CustomerController(CustomerProductService customerProductService, CustomerService customerService, ProductService productService, MailService mailService)
         {
             _customerProductService = customerProductService;
             _customerService = customerService;
             _productService = productService;
+            _mailService = mailService;
+        }
+
+        public class QuestionViewModel
+        {
+            public string? Name { get; set; }
+            public string? Question { get; set; }
+            public string? Email { get; set; }
         }
 
         // GET: CustomerController
@@ -80,6 +90,26 @@ namespace Sklep_MVC_Projekt.Controllers
             {
                 return View();
             }
+        }
+
+
+        [HttpGet]
+        public IActionResult Question()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Question(QuestionViewModel model)
+        {
+            if (model is null || model.Name is null || model.Email is null || model.Question is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            _mailService.SendEmail($"<h1>Pytanie do admina</h1><br /><h3>Od: {model.Email}</h3><br /><p>{model.Question}</p>", "Pytanie do admina", "mvcshopemailer@gmail.com", model.Name);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

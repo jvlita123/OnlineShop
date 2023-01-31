@@ -13,6 +13,10 @@ namespace Sklep_MVC_Projekt.Services
             _productRepository = productRepository;
         }
 
+        public List<Product> GetNewAndPromoProducts()
+        {
+            return _productRepository.GetNewAndPromoProducts();
+        }
         public List<Product> GetAll()
         {
             return _productRepository.GetAll().Include(x=>x.Photo).ToList();
@@ -58,6 +62,20 @@ namespace Sklep_MVC_Projekt.Services
         public void UpdateAndSaveChanges(Product product)
         {
             _productRepository.UpdateAndSaveChanges(product);
+        }
+
+        public List<Product> Nowosci()
+        {
+            
+            return _productRepository.GetNowosci();
+
+        }
+
+        public List<Product> Promocje()
+        {
+
+            return _productRepository.GetPromo();
+
         }
     }
 }

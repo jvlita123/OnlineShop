@@ -17,15 +17,17 @@ namespace Sklep_MVC_Projekt.Models
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-        private int _price;
+        private decimal _price;
         [Required(ErrorMessage = "Price is required")]
         [Display(Name = "Price")]
-        public int Price
+        public decimal Price
         {
             get { return _price; }
             set { _price = value; }
         }
 
+        public DateTime DateAdded { get; set; }
+        public DateTime SaleEndDate { get; internal set; }
         public bool IsNew { get; set; }
 
         public bool IsOnSale { get; set; }
@@ -45,6 +47,6 @@ namespace Sklep_MVC_Projekt.Models
         public virtual ICollection<Photo> Photo { get; set; }
         public virtual ICollection<ProductOrder> ProductOrders { get; set; }
         public virtual ICollection<CustomerProduct> CustomerProducts { get; set; }
-
+        
     }
 }

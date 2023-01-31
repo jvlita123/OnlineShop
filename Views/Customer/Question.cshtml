@@ -1,0 +1,29 @@
+﻿@model Sklep_MVC_Projekt.Controllers.CustomerController.QuestionViewModel
+@{
+    ViewData["Title"] = "Ask me a question!";
+}
+<style>
+.myform{
+  border: 2px outset black;
+  background-color: white  ;
+  text-align: center;
+  font-family: Arial;
+}
+</style>
+
+<h1>Ask me a question!</h1>
+
+<div class="myform">
+    <form asp-action="question" method="post">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" />
+        <br />
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" type="email" />
+        <br />
+        <label asp-for="Question">Question</label>
+        <input asp-for="Question" type="text" />
+        <br />
+        <button type="submit">Ask!</button>
+    </form>
+</div>
